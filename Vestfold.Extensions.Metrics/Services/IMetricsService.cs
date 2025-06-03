@@ -16,7 +16,8 @@ public interface IMetricsService
     void Count(string name, string? description = null, int increment = 1);
     
     /// <summary>
-    /// Counters only increase in value and reset to zero when the process restarts
+    /// Counters only increase in value and reset to zero when the process restarts<br /><br />
+    /// <b>All labels to be used in the same run must be registered when the metric is created the first time.<br />New labelsNames can't be added after the metric is created.<br />LabelValues however will be added to the initial labelNames</b>
     /// </summary>
     /// <param name="name">Name of the counter metric</param>
     /// <param name="description">Description of the counter metric (defaults to string.Empty)</param>
@@ -26,7 +27,8 @@ public interface IMetricsService
         params (string labelName, string labelValue)[] labels);
     
     /// <summary>
-    /// Counters only increase in value and reset to zero when the process restarts
+    /// Counters only increase in value and reset to zero when the process restarts<br /><br />
+    /// <b>All labels to be used in the same run must be registered when the metric is created the first time.<br />New labelsNames can't be added after the metric is created.<br />LabelValues however will be added to the initial labelNames</b>
     /// </summary>
     /// <param name="name">Name of the counter metric</param>
     /// <param name="description">Description of the counter metric (defaults to string.Empty)</param>
@@ -49,7 +51,8 @@ public interface IMetricsService
     void Gauge(string name, double value);
     
     /// <summary>
-    /// Gauges can have any numeric value and change arbitrarily
+    /// Gauges can have any numeric value and change arbitrarily<br /><br />
+    /// <b>All labels to be used in the same run must be registered when the metric is created the first time.<br />New labelsNames can't be added after the metric is created.<br />LabelValues however will be added to the initial labelNames</b>
     /// </summary>
     /// <param name="name">Name of the gauge metric</param>
     /// <param name="description">Description of the gauge metric</param>
@@ -58,7 +61,8 @@ public interface IMetricsService
     void Gauge(string name, string description, double value, params (string labelName, string labelValue)[] labels);
     
     /// <summary>
-    /// Gauges can have any numeric value and change arbitrarily
+    /// Gauges can have any numeric value and change arbitrarily<br /><br />
+    /// <b>All labels to be used in the same run must be registered when the metric is created the first time.<br />New labelsNames can't be added after the metric is created.<br />LabelValues however will be added to the initial labelNames</b>
     /// </summary>
     /// <param name="name">Name of the gauge metric</param>
     /// <param name="value">Gauge value at this moment</param>
@@ -74,7 +78,8 @@ public interface IMetricsService
     ITimer Histogram(string name, string? description = null);
     
     /// <summary>
-    /// A timer that can be used to observe a duration of elapsed time. The observation is made either when ObserveDuration is called or when the instance is disposed of
+    /// A timer that can be used to observe a duration of elapsed time. The observation is made either when ObserveDuration is called or when the instance is disposed of<br /><br />
+    /// <b>All labels to be used in the same run must be registered when the metric is created the first time.<br />New labelsNames can't be added after the metric is created.<br />LabelValues however will be added to the initial labelNames</b>
     /// </summary>
     /// <param name="name">Name of the histogram metric</param>
     /// <param name="description">Description of the histogram metric (defaults to string.Empty)</param>
@@ -83,7 +88,8 @@ public interface IMetricsService
     ITimer Histogram(string name, string? description = null, params (string labelName, string labelValue)[] labels);
     
     /// <summary>
-    /// A timer that can be used to observe a duration of elapsed time. The observation is made either when ObserveDuration is called or when the instance is disposed of
+    /// A timer that can be used to observe a duration of elapsed time. The observation is made either when ObserveDuration is called or when the instance is disposed of<br /><br />
+    /// <b>All labels to be used in the same run must be registered when the metric is created the first time.<br />New labelsNames can't be added after the metric is created.<br />LabelValues however will be added to the initial labelNames</b>
     /// </summary>
     /// <param name="name">Name of the histogram metric</param>
     /// <param name="labels">Labels to associate with the histogram metric</param>

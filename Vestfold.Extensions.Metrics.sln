@@ -2,6 +2,8 @@
 Microsoft Visual Studio Solution File, Format Version 12.00
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Vestfold.Extensions.Metrics", "Vestfold.Extensions.Metrics\Vestfold.Extensions.Metrics.csproj", "{7CBD30C4-DC90-4408-ADA0-7F20BF272241}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Vestfold.Extensions.Metrics.Test", "Vestfold.Extensions.Metrics.Test\Vestfold.Extensions.Metrics.Test.csproj", "{A02EC966-107E-4973-B06A-7F9C138E5633}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -12,5 +14,9 @@ Global
 		{7CBD30C4-DC90-4408-ADA0-7F20BF272241}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7CBD30C4-DC90-4408-ADA0-7F20BF272241}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7CBD30C4-DC90-4408-ADA0-7F20BF272241}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A02EC966-107E-4973-B06A-7F9C138E5633}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A02EC966-107E-4973-B06A-7F9C138E5633}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A02EC966-107E-4973-B06A-7F9C138E5633}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A02EC966-107E-4973-B06A-7F9C138E5633}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
