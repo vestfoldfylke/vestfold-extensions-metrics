@@ -19,7 +19,9 @@ builder.Services.UseHttpClientMetrics();
 builder.Build().Run();
 ```
 
-Add a new HTTPTrigger function to your Azure Function project, and add the following code to it:
+Since Azure Functions do not support the `MetricServer` method, you will need to create a custom HTTP trigger to expose the metrics endpoint.
+
+So add a new HTTPTrigger function to your Azure Function project, and add the following code to it:
 ```csharp
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
