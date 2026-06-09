@@ -27,7 +27,7 @@ public class MetricsServiceTest
 
         var registeredMetrics = await GetRegisteredMetrics();
 
-        Assert.Single(registeredMetrics.Where(m => m == $"{metricName} {metricIncrementValue}"));
+        Assert.Single(registeredMetrics, metric => metric == $"{metricName} {metricIncrementValue}");
     }
     
     [Fact]
@@ -44,14 +44,14 @@ public class MetricsServiceTest
 
         var registeredMetrics = await GetRegisteredMetrics();
         
-        Assert.Single(registeredMetrics.Where(m => m == $"{metricName}{{{metricLabels.Item1}=\"{metricLabels.Item2}\"}} {metricIncrementValue1}"));
+        Assert.Single(registeredMetrics, metric => metric == $"{metricName}{{{metricLabels.Item1}=\"{metricLabels.Item2}\"}} {metricIncrementValue1}");
         
         // update metric with labels
         _metricsService.Count(metricName, metricDescription, metricIncrementValue2, metricLabels);
 
         registeredMetrics = await GetRegisteredMetrics();
         
-        Assert.Single(registeredMetrics.Where(m => m == $"{metricName}{{{metricLabels.Item1}=\"{metricLabels.Item2}\"}} {metricIncrementValue1 + metricIncrementValue2}"));
+        Assert.Single(registeredMetrics, metric => metric == $"{metricName}{{{metricLabels.Item1}=\"{metricLabels.Item2}\"}} {metricIncrementValue1 + metricIncrementValue2}");
     }
     
     [Fact]
@@ -67,14 +67,14 @@ public class MetricsServiceTest
 
         var registeredMetrics = await GetRegisteredMetrics();
         
-        Assert.Single(registeredMetrics.Where(m => m == $"{metricName}{{{metricLabels.Item1}=\"{metricLabels.Item2}\"}} {metricIncrementValue}"));
+        Assert.Single(registeredMetrics, metric => metric == $"{metricName}{{{metricLabels.Item1}=\"{metricLabels.Item2}\"}} {metricIncrementValue}");
         
         // update metric with labels
         _metricsService.Count(metricName, metricDescription, metricLabels);
 
         registeredMetrics = await GetRegisteredMetrics();
         
-        Assert.Single(registeredMetrics.Where(m => m == $"{metricName}{{{metricLabels.Item1}=\"{metricLabels.Item2}\"}} {metricIncrementValue * 2}"));
+        Assert.Single(registeredMetrics, metric => metric == $"{metricName}{{{metricLabels.Item1}=\"{metricLabels.Item2}\"}} {metricIncrementValue * 2}");
     }
     
     [Fact]
@@ -88,7 +88,7 @@ public class MetricsServiceTest
 
         var registeredMetrics = await GetRegisteredMetrics();
         
-        Assert.Single(registeredMetrics.Where(m => m == $"{metricName} {metricValue}"));
+        Assert.Single(registeredMetrics, metric => metric == $"{metricName} {metricValue}");
     }
     
     [Fact]
@@ -101,7 +101,7 @@ public class MetricsServiceTest
 
         var registeredMetrics = await GetRegisteredMetrics();
         
-        Assert.Single(registeredMetrics.Where(m => m == $"{metricName} {metricValue}"));
+        Assert.Single(registeredMetrics, metric => metric == $"{metricName} {metricValue}");
     }
     
     [Fact]
@@ -118,14 +118,14 @@ public class MetricsServiceTest
 
         var registeredMetrics = await GetRegisteredMetrics();
         
-        Assert.Single(registeredMetrics.Where(m => m == $"{metricName}{{{metricLabels.Item1}=\"{metricLabels.Item2}\"}} {metricValue1}"));
+        Assert.Single(registeredMetrics, metric => metric == $"{metricName}{{{metricLabels.Item1}=\"{metricLabels.Item2}\"}} {metricValue1}");
         
         // update metric with labels
         _metricsService.Gauge(metricName, metricDescription, metricValue2, metricLabels);
 
         registeredMetrics = await GetRegisteredMetrics();
         
-        Assert.Single(registeredMetrics.Where(m => m == $"{metricName}{{{metricLabels.Item1}=\"{metricLabels.Item2}\"}} {metricValue2}"));
+        Assert.Single(registeredMetrics, metric => metric == $"{metricName}{{{metricLabels.Item1}=\"{metricLabels.Item2}\"}} {metricValue2}");
     }
     
     [Fact]
@@ -141,14 +141,14 @@ public class MetricsServiceTest
 
         var registeredMetrics = await GetRegisteredMetrics();
         
-        Assert.Single(registeredMetrics.Where(m => m == $"{metricName}{{{metricLabels.Item1}=\"{metricLabels.Item2}\"}} {metricValue1}"));
+        Assert.Single(registeredMetrics, metric => metric == $"{metricName}{{{metricLabels.Item1}=\"{metricLabels.Item2}\"}} {metricValue1}");
         
         // update first metric with labels
         _metricsService.Gauge(metricName, metricValue2, metricLabels);
 
         registeredMetrics = await GetRegisteredMetrics();
         
-        Assert.Single(registeredMetrics.Where(m => m == $"{metricName}{{{metricLabels.Item1}=\"{metricLabels.Item2}\"}} {metricValue2}"));
+        Assert.Single(registeredMetrics, metric => metric == $"{metricName}{{{metricLabels.Item1}=\"{metricLabels.Item2}\"}} {metricValue2}");
     }
     
     [Fact]
@@ -164,10 +164,10 @@ public class MetricsServiceTest
         var registeredMetrics = await GetRegisteredMetrics();
 
         // Histogram metrics have multiple bucket lines + sum and count
-        Assert.Equal(metricCount, registeredMetrics.Count(m => m.Contains($"{metricName}_")));
-        Assert.Single(registeredMetrics.Where(m => m.Contains($"{metricName}_sum")));
-        Assert.Single(registeredMetrics.Where(m => m == $"{metricName}_count 1"));
-        Assert.Equal(metricCount - 2, registeredMetrics.Count(m => m.Contains($"{metricName}_bucket")));
+        Assert.Equal(metricCount, registeredMetrics.Count(metric => metric.Contains($"{metricName}_")));
+        Assert.Single(registeredMetrics, metric => metric.Contains($"{metricName}_sum"));
+        Assert.Single(registeredMetrics, metric => metric == $"{metricName}_count 1");
+        Assert.Equal(metricCount - 2, registeredMetrics.Count(metric => metric.Contains($"{metricName}_bucket")));
     }
     
     [Fact]
@@ -185,10 +185,10 @@ public class MetricsServiceTest
         var registeredMetrics = await GetRegisteredMetrics();
         
         // Histogram metrics have multiple bucket lines + sum and count
-        Assert.Equal(metricCount, registeredMetrics.Count(m => m.Contains($"{metricName}_")));
-        Assert.Single(registeredMetrics.Where(m => m.Contains($"{metricName}_sum{{{metricLabels.Item1}=\"{metricLabels.Item2}\"}}")));
-        Assert.Single(registeredMetrics.Where(m => m == $"{metricName}_count{{{metricLabels.Item1}=\"{metricLabels.Item2}\"}} 1"));
-        Assert.Equal(metricCount - 2, registeredMetrics.Count(m => m.Contains($"{metricName}_bucket{{{metricLabels.Item1}=\"{metricLabels.Item2}\"")));
+        Assert.Equal(metricCount, registeredMetrics.Count(metric => metric.Contains($"{metricName}_")));
+        Assert.Single(registeredMetrics, metric => metric.Contains($"{metricName}_sum{{{metricLabels.Item1}=\"{metricLabels.Item2}\"}}"));
+        Assert.Single(registeredMetrics, metric => metric == $"{metricName}_count{{{metricLabels.Item1}=\"{metricLabels.Item2}\"}} 1");
+        Assert.Equal(metricCount - 2, registeredMetrics.Count(metric => metric.Contains($"{metricName}_bucket{{{metricLabels.Item1}=\"{metricLabels.Item2}\"")));
     }
     
     [Fact]
@@ -205,10 +205,10 @@ public class MetricsServiceTest
         var registeredMetrics = await GetRegisteredMetrics();
         
         // Histogram metrics have multiple bucket lines + sum and count
-        Assert.Equal(metricCount, registeredMetrics.Count(m => m.Contains($"{metricName}_")));
-        Assert.Single(registeredMetrics.Where(m => m.Contains($"{metricName}_sum{{{metricLabels.Item1}=\"{metricLabels.Item2}\"}}")));
-        Assert.Single(registeredMetrics.Where(m => m == $"{metricName}_count{{{metricLabels.Item1}=\"{metricLabels.Item2}\"}} 1"));
-        Assert.Equal(metricCount - 2, registeredMetrics.Count(m => m.Contains($"{metricName}_bucket{{{metricLabels.Item1}=\"{metricLabels.Item2}\"")));
+        Assert.Equal(metricCount, registeredMetrics.Count(metric => metric.Contains($"{metricName}_")));
+        Assert.Single(registeredMetrics, metric => metric.Contains($"{metricName}_sum{{{metricLabels.Item1}=\"{metricLabels.Item2}\"}}"));
+        Assert.Single(registeredMetrics, metric => metric == $"{metricName}_count{{{metricLabels.Item1}=\"{metricLabels.Item2}\"}} 1");
+        Assert.Equal(metricCount - 2, registeredMetrics.Count(metric => metric.Contains($"{metricName}_bucket{{{metricLabels.Item1}=\"{metricLabels.Item2}\"")));
     }
 
     private static async Task<List<string>> GetRegisteredMetrics()
