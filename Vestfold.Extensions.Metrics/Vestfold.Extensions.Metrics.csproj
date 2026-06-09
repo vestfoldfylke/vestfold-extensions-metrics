@@ -7,7 +7,7 @@
         <EnforceCodeStyleInBuild>true</EnforceCodeStyleInBuild>
 
         <PackageId>Vestfold.Extensions.Metrics</PackageId>
-        <Version>1.0.1</Version>
+        <Version>1.0.2</Version>
         <Authors>Rune Moskvil Lyngås</Authors>
         <Company>Vestfold fylkeskommune</Company>
         <PackageLicenseFile>LICENSE</PackageLicenseFile>
@@ -18,10 +18,6 @@
         <PackageReadmeFile>README.md</PackageReadmeFile>
 
         <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
-
-        <NugetAudit>true</NugetAudit>
-        <NugetAuditMode>all</NugetAuditMode> <!-- all (direct and transitive dependencies), direct (direct dependencies only) -->
-        <NugetAuditLevel>moderate</NugetAuditLevel> <!-- low (->), moderate (->), high (->), critical (->) -->
     </PropertyGroup>
 
     <ItemGroup>
@@ -36,7 +32,7 @@
     </ItemGroup>
 
     <ItemGroup>
-      <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="9.0.5" />
+      <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="10.0.8" />
       <PackageReference Include="prometheus-net.AspNetCore" Version="8.2.1" />
     </ItemGroup>
 
